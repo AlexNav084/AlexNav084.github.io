@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Servicio que devuelve JSON</title>
+
+</head>
+
+<body>
+
+ <h1>Servicio que devuelve JSON</h1>
+
+ <p><button id="boton">Recupera datos</button></p>
+
+ <script type="module">
+
+  import { consume } from "./libclienteweb/consume.js"
+  import { recibeJson } from "./libclienteweb/recibeJson.js"
+  import { muestraError } from "./libclienteweb/muestraError.js"
+
+  boton.addEventListener("click", recibeDatos)
+
+  async function recibeDatos() {
+   try {
+    const respuesta = await consume(
+     recibeJson("api/devuelve.php"))
+    const json =
+     await respuesta.json()
+    alert(
+     `Mensaje: ${json.mensaje}
+Nombre: ${json.nombre}`)
+   } catch (error) {
+    muestraError(error)
+   }
+  }
+
+ </script>
+
+</body>
+
+</html>
